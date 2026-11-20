@@ -6,12 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 
 import { WorkoutContextProvider } from "./context/WorkContext";
 
+import { AuthContextProvider } from "./context/AuthContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <WorkoutContextProvider>
-      <App />
-    </WorkoutContextProvider>
+    <AuthContextProvider>
+      <WorkoutContextProvider>
+        <App />
+      </WorkoutContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
 );
 

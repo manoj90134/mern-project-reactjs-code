@@ -4,6 +4,8 @@ import Navigation from "../Component/Navigation";
 import Workoutdetails from "../Component/Workoutdetails";
 import Addworkout from "../Component/Addworkout";
 
+import { ApiUrl } from "../Env";
+
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
 const Home = () => {
@@ -13,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await fetch("http://localhost:8000/workout/all-view");
+      const response = await fetch(ApiUrl + "workout/all-view");
 
       const data = await response.json();
 

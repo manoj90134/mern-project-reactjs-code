@@ -2,6 +2,8 @@ import React from "react";
 
 import "../App.css";
 
+import { ApiUrl } from "../Env";
+
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
 const Workoutdetails = (Workoutdetails) => {
@@ -9,8 +11,7 @@ const Workoutdetails = (Workoutdetails) => {
 
   const OndeleteSubmit = async () => {
     const deleteData = await fetch(
-      "http://localhost:8000/workout/delete-view/" +
-        Workoutdetails.Workoutdetails._id,
+      ApiUrl + "workout/delete-view/" + Workoutdetails.Workoutdetails._id,
       {
         method: "delete",
       },

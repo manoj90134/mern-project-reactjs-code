@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import "../App.css";
 
+import { ApiUrl } from "../Env";
+
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
 const Addworkout = () => {
@@ -50,7 +52,7 @@ const Addworkout = () => {
       return SetError("All Fields Are required");
     }
 
-    const HitApi = await fetch("http://localhost:8000/workout/create", {
+    const HitApi = await fetch(ApiUrl + "workout/create", {
       method: "post",
       body: JSON.stringify(workout),
       headers: {
