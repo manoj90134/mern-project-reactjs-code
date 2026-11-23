@@ -8,14 +8,26 @@ import { ApiUrl } from "../Env";
 
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
+import { useAuthcontext } from "../hooks/useAuthContext";
+
 const Home = () => {
   // const [workouts, SetWorkout] = useState("");
 
   const { workouts, dispatch } = useWorkoutcontext();
 
+  const { user } = useAuthcontext(); // get Value from authtication
+
+  console.log("home page", user);
+
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await fetch(ApiUrl + "workout/all-view");
+      const response = await fetch(ApiUrl + "workout/all-view", {
+        Method: "get",
+        headers: {
+          "content-type": "Application/json",
+          authorization: `Bearer ${user.token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -30,8 +42,10 @@ const Home = () => {
       }
     };
 
-    fetchApi();
-  }, [dispatch]);
+    if (user) {
+      fetchApi();
+    }
+  }, [dispatch, user]);
 
   return (
     <div>

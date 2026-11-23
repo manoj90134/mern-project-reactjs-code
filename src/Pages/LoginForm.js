@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 
-import { ApiUrl } from "../Env";
+import { useLogin } from "../hooks/useLogin";
+
+import Navigation from "../Component/Navigation";
 
 const LoginForm = () => {
   const [email, SetEmail] = useState();
   const [password, SetPassword] = useState();
 
-  const SubmitForm = (e) => {
+  const { LoginupHook, error, loading } = useLogin();
+
+  // console.log("error", error);
+
+  const SubmitForm = async (e) => {
     e.preventDefault();
 
-    console.log("email", email);
-    console.log("password", password);
-  };
+    const userSignin = await LoginupHook(email, password);
 
-  console.log(ApiUrl);
+    if (userSignin.success === true) {
+      alert(userSignin.message);
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <>
+      <Navigation />
+
       <div className="jumbotron text-center">
-        <h4> Login Form </h4>
+        <h4> Login </h4>
       </div>
 
       <div className="container">
@@ -49,11 +60,18 @@ const LoginForm = () => {
               onChange={(e) => SetPassword(e.target.value)}
             />
           </div>
+
           <br />
-          <button type="submit" className="btn btn-primary btn-lg">
+          <button
+            type="submit"
+            className="btn btn-primary btn-lg"
+            disabled={loading}
+          >
             Submit
           </button>
         </form>
+
+        {error && <div className="errorScreen">{error}</div>}
       </div>
     </>
   );

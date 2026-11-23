@@ -6,14 +6,22 @@ import { ApiUrl } from "../Env";
 
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
+import { useAuthcontext } from "../hooks/useAuthContext";
+
 const Workoutdetails = (Workoutdetails) => {
   const { dispatch } = useWorkoutcontext();
+
+  const { user } = useAuthcontext(); // get Value from authtication
 
   const OndeleteSubmit = async () => {
     const deleteData = await fetch(
       ApiUrl + "workout/delete-view/" + Workoutdetails.Workoutdetails._id,
       {
         method: "delete",
+        headers: {
+          "content-type": "Application/json",
+          authorization: "bearear " + user.token,
+        },
       },
     );
 

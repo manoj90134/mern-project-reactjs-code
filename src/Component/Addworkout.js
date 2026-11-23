@@ -6,8 +6,12 @@ import { ApiUrl } from "../Env";
 
 import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 
+import { useAuthcontext } from "../hooks/useAuthContext";
+
 const Addworkout = () => {
   const { dispatch } = useWorkoutcontext(); // use context hooks
+
+  const { user } = useAuthcontext(); // get Value from authtication
 
   const [title, SetTitle] = useState("");
   const [reps, SetReps] = useState("");
@@ -57,12 +61,13 @@ const Addworkout = () => {
       body: JSON.stringify(workout),
       headers: {
         "content-type": "Application/json",
+        authorization: "bearear " + user.token ?? " ",
       },
     });
 
     const getrespons = await HitApi.json();
 
-    if (getrespons.success === true) {
+    if (HitApi.ok === true) {
       SetSuccess("Data insert succesfully");
       //   console.log("Data insert succesfully");
 
@@ -76,8 +81,10 @@ const Addworkout = () => {
       dispatch({ type: "CREATE_WORKOUT", payload: getrespons.data });
     }
 
-    if (getrespons.success === false) {
+    if (HitApi.ok === false) {
       SetError(getrespons.message);
+
+      console.log("errr", getrespons.message);
     }
   };
 

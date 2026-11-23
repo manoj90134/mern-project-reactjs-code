@@ -1,5 +1,6 @@
 // import React from "react";
 
+import { redirect } from "react-router-dom";
 import { useAuthcontext } from "../hooks/useAuthContext";
 
 export const Logout = () => {
@@ -9,6 +10,8 @@ export const Logout = () => {
     localStorage.removeItem("user");
 
     dispatch({ type: "LOGOUT" });
+
+    window.location.href = "/login";
   };
 
   return { out };

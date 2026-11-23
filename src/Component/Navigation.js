@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 
 import { Logout } from "../Pages/Logout";
 
+import { useAuthcontext } from "../hooks/useAuthContext";
+
 const Navigation = () => {
   const { out } = Logout();
+
+  const { user } = useAuthcontext();
 
   const logoutcalled = () => {
     out();
@@ -28,22 +32,35 @@ const Navigation = () => {
                 </Link>
               </li>
 
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Sign Up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
+              {!user && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signup">
+                      Sign Up
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
 
-              <li className="nav-item">
-                <button className="btn btn-success" onClick={logoutcalled}>
-                  logout
-                </button>
-              </li>
+              {user && user.email && (
+                <>
+                  <li className="nav-item">
+                    <h5>
+                      <b> {user.email} </b>
+                    </h5>
+                  </li>
+                  <li className="nav-item">
+                    <button className="btn btn-success" onClick={logoutcalled}>
+                      logout
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </nav>
