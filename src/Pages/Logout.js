@@ -1,6 +1,5 @@
 // import React from "react";
 
-import { redirect } from "react-router-dom";
 import { useAuthcontext } from "../hooks/useAuthContext";
 
 export const Logout = () => {
