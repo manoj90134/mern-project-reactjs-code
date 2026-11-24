@@ -8,6 +8,9 @@ import { WorkoutContextProvider } from "./context/WorkContext";
 
 import { AuthContextProvider } from "./context/AuthContext";
 
+// import dotenv from "dotenv";
+// dotenv.config();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

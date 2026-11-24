@@ -1,3 +1,3 @@
-export const ApiUrl = "http://localhost:8000/";
+export const ApiUrl = "https://mern-project-nodejs-code.vercel.app/";
 
 export default ApiUrl;

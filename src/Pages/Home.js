@@ -11,6 +11,7 @@ import { useWorkoutcontext } from "../hooks/useWorkoutsContext";
 import { useAuthcontext } from "../hooks/useAuthContext";
 
 const Home = () => {
+  console.log("ApiUrl", ApiUrl);
   // const [workouts, SetWorkout] = useState("");
 
   const { workouts, dispatch } = useWorkoutcontext();
